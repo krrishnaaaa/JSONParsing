@@ -42,14 +42,12 @@ public class PostBaseAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder viewHolder;
         if (convertView == null) {
-            convertView = layoutInflater.inflate(R.layout.list_item_post, null);
-            viewHolder = new ViewHolder();
+            convertView = layoutInflater.inflate(R.layout.list_item_post, parent, false);
+            viewHolder = new ViewHolder(convertView);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-        viewHolder.tvTitle = (TextView) convertView.findViewById(R.id.tvTitle);
-        viewHolder.tvPublishDate = (TextView) convertView.findViewById(R.id.tvPublishDate);
 
         PostValue postValue = getItem(position);
         viewHolder.tvTitle.setText(postValue.getTitle());
@@ -60,5 +58,10 @@ public class PostBaseAdapter extends BaseAdapter {
 
     private class ViewHolder {
         TextView tvTitle, tvPublishDate;
+
+        public ViewHolder(View item) {
+            tvTitle = (TextView) item.findViewById(R.id.tvTitle);
+            tvPublishDate = (TextView) item.findViewById(R.id.tvPublishDate);
+        }
     }
 }
